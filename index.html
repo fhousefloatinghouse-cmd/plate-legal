@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PLATÉ — Support</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #ffffff;
+      --off-white: #f5f5f7;
+      --light-gray: #e8e8ed;
+      --mid-gray: #86868b;
+      --dark: #1d1d1f;
+      --accent: #d4a843;
+      --accent-light: #f5e6c0;
+      --radius: 18px;
+      --shadow: 0 2px 20px rgba(0,0,0,0.06);
+      --shadow-hover: 0 8px 40px rgba(0,0,0,0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+      background: var(--white);
+      color: var(--dark);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--light-gray);
+      padding: 0 24px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--dark);
+      text-decoration: none;
+    }
+
+    .nav-logo span {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    .nav-lang {
+      display: flex;
+      gap: 4px;
+    }
+
+    .lang-btn {
+      background: none;
+      border: 1px solid var(--light-gray);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--mid-gray);
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.03em;
+    }
+
+    .lang-btn.active, .lang-btn:hover {
+      background: var(--dark);
+      color: var(--white);
+      border-color: var(--dark);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 80px 24px 60px;
+      background: var(--white);
+    }
+
+    .hero-eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 6vw, 60px);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--dark);
+      margin-bottom: 16px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero p {
+      font-size: 17px;
+      color: var(--mid-gray);
+      max-width: 480px;
+      margin: 0 auto;
+      font-weight: 300;
+    }
+
+    /* ── MAIN CONTAINER ── */
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 100px;
+    }
+
+    /* ── CONTACT CARD ── */
+    .contact-card {
+      background: var(--off-white);
+      border-radius: var(--radius);
+      padding: 40px;
+      margin-bottom: 24px;
+      transition: box-shadow 0.3s;
+    }
+
+    .contact-card:hover {
+      box-shadow: var(--shadow-hover);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--accent);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .card-icon svg {
+      width: 20px;
+      height: 20px;
+      fill: white;
+    }
+
+    .card-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .card-subtitle {
+      font-size: 13px;
+      color: var(--mid-gray);
+      margin-top: 2px;
+    }
+
+    /* ── FORM ── */
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--mid-gray);
+      margin-bottom: 7px;
+      letter-spacing: 0.02em;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      background: var(--white);
+      border: 1.5px solid var(--light-gray);
+      border-radius: 12px;
+      padding: 13px 16px;
+      font-size: 15px;
+      font-family: inherit;
+      color: var(--dark);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-light);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2386868b' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      cursor: pointer;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 480px) {
+      .form-row { grid-template-columns: 1fr; }
+      .contact-card { padding: 28px 24px; }
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--dark);
+      color: var(--white);
+      border: none;
+      border-radius: 14px;
+      padding: 16px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.01em;
+      margin-top: 8px;
+    }
+
+    .submit-btn:hover {
+      background: #000;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    .submit-btn.loading {
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    /* ── SUCCESS STATE ── */
+    .success-state {
+      display: none;
+      text-align: center;
+      padding: 24px 0 8px;
+    }
+
+    .success-state.show { display: block; }
+
+    .success-icon {
+      width: 52px;
+      height: 52px;
+      background: #34c759;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .success-icon svg { width: 24px; height: 24px; stroke: white; fill: none; stroke-width: 3; }
+
+    .success-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .success-msg {
+      font-size: 14px;
+      color: var(--mid-gray);
+    }
+
+    /* ── DIRECT EMAIL ── */
+    .direct-email {
+      background: var(--white);
+      border: 1.5px solid var(--light-gray);
+      border-radius: var(--radius);
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      text-decoration: none;
+      transition: all 0.25s;
+      flex-wrap: wrap;
+    }
+
+    .direct-email:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-2px);
+    }
+
+    .direct-email-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .email-dot {
+      width: 10px;
+      height: 10px;
+      background: #34c759;
+      border-radius: 50%;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 3px rgba(52,199,89,0.2);
+    }
+
+    .direct-email-text strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .direct-email-text span {
+      font-size: 13px;
+      color: var(--mid-gray);
+    }
+
+    .email-arrow {
+      font-size: 18px;
+      color: var(--mid-gray);
+    }
+
+    /* ── SECTION DIVIDER ── */
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      margin: 40px 0 16px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--light-gray);
+      padding: 32px 24px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .footer-logo span { color: var(--accent); font-style: italic; }
+
+    footer p {
+      font-size: 12px;
+      color: var(--mid-gray);
+    }
+
+    /* ── LANG TOGGLE ── */
+    [data-lang="tr"] { display: none; }
+    body.lang-tr [data-lang="en"] { display: none; }
+    body.lang-tr [data-lang="tr"] { display: block; }
+    body.lang-tr [data-lang="tr"].inline { display: inline; }
+    [data-lang="en"].inline { display: inline; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero { animation: fadeUp 0.6s ease both; }
+    .contact-card { animation: fadeUp 0.6s 0.1s ease both; }
+    .direct-email { animation: fadeUp 0.6s 0.2s ease both; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">PLA<span>TÉ</span></a>
+    <div class="nav-lang">
+      <button class="lang-btn active" onclick="setLang('en')" id="btn-en">EN</button>
+      <button class="lang-btn" onclick="setLang('tr')" id="btn-tr">TR</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <p class="hero-eyebrow">
+      <span data-lang="en">Support Center</span>
+      <span data-lang="tr">Destek Merkezi</span>
+    </p>
+    <h1>
+      <span data-lang="en" class="inline">How can we <em>help?</em></span>
+      <span data-lang="tr" class="inline">Size nasıl <em>yardımcı</em> olabiliriz?</span>
+    </h1>
+    <p>
+      <span data-lang="en">We're here to help with PLATÉ. Send us a message and we'll get back to you as soon as possible.</span>
+      <span data-lang="tr">PLATÉ ile ilgili her konuda buradayız. Bize bir mesaj gönderin, en kısa sürede geri döneceğiz.</span>
+    </p>
+  </div>
+
+  <!-- MAIN -->
+  <div class="container">
+
+    <!-- Contact Form Card -->
+    <div class="contact-card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </div>
+        <div>
+          <div class="card-title">
+            <span data-lang="en">Send a Message</span>
+            <span data-lang="tr">Mesaj Gönder</span>
+          </div>
+          <div class="card-subtitle">
+            <span data-lang="en">Typically reply within 24 hours</span>
+            <span data-lang="tr">Genellikle 24 saat içinde yanıt verilir</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div id="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>
+              <span data-lang="en">Name</span>
+              <span data-lang="tr">Ad Soyad</span>
+            </label>
+            <input type="text" id="field-name" placeholder="Jane Smith" />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="field-email" placeholder="you@example.com" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>
+            <span data-lang="en">Topic</span>
+            <span data-lang="tr">Konu</span>
+          </label>
+          <select id="field-topic">
+            <option value="" disabled selected>
+            </option>
+            <option value="billing" data-en="Subscription & Billing" data-tr="Abonelik ve Ödeme">Subscription & Billing</option>
+            <option value="coins" data-en="Coins & Purchases" data-tr="Coin ve Satın Alma">Coins & Purchases</option>
+            <option value="ai" data-en="AI Generation Issue" data-tr="Yapay Zeka Sorunu">AI Generation Issue</option>
+            <option value="account" data-en="Account & Data" data-tr="Hesap ve Veriler">Account & Data</option>
+            <option value="bug" data-en="Bug Report" data-tr="Hata Bildirimi">Bug Report</option>
+            <option value="other" data-en="Other" data-tr="Diğer">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>
+            <span data-lang="en">Message</span>
+            <span data-lang="tr">Mesajınız</span>
+          </label>
+          <textarea id="field-message" placeholder=""></textarea>
+        </div>
+
+        <button class="submit-btn" id="submit-btn" onclick="submitForm()">
+          <span data-lang="en">Send Message</span>
+          <span data-lang="tr">Mesaj Gönder</span>
+        </button>
+      </div>
+
+      <!-- Success -->
+      <div class="success-state" id="success-state">
+        <div class="success-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <div class="success-title">
+          <span data-lang="en">Message sent!</span>
+          <span data-lang="tr">Mesajınız iletildi!</span>
+        </div>
+        <p class="success-msg">
+          <span data-lang="en">Thanks for reaching out. We'll be in touch shortly.</span>
+          <span data-lang="tr">Bize ulaştığınız için teşekkürler. En kısa sürede dönüş yapacağız.</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Direct Email -->
+    <p class="section-label">
+      <span data-lang="en">Or contact directly</span>
+      <span data-lang="tr">Ya da doğrudan yazın</span>
+    </p>
+
+    <a class="direct-email" href="mailto:fhouse.floatinghouse@gmail.com">
+      <div class="direct-email-left">
+        <div class="email-dot"></div>
+        <div class="direct-email-text">
+          <strong>fhouse.floatinghouse@gmail.com</strong>
+          <span>
+            <span data-lang="en">Open in your mail app</span>
+            <span data-lang="tr">Mail uygulamasında aç</span>
+          </span>
+        </div>
+      </div>
+      <div class="email-arrow">↗</div>
+    </a>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">PLA<span>TÉ</span></div>
+    <p>© 2025 Floating House. 
+      <span data-lang="en">All rights reserved.</span>
+      <span data-lang="tr">Tüm hakları saklıdır.</span>
+    </p>
+  </footer>
+
+  <script>
+    // ── Language ──
+    function setLang(lang) {
+      document.body.classList.toggle('lang-tr', lang === 'tr');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.getElementById('btn-tr').classList.toggle('active', lang === 'tr');
+
+      // Update select options
+      const select = document.getElementById('field-topic');
+      const attr = lang === 'tr' ? 'data-tr' : 'data-en';
+      Array.from(select.options).forEach(opt => {
+        if (opt.value) opt.textContent = opt.getAttribute(attr);
+      });
+
+      // Update placeholders
+      const msgField = document.getElementById('field-message');
+      msgField.placeholder = lang === 'tr'
+        ? 'Sorununuzu veya geri bildiriminizi buraya yazın…'
+        : 'Describe your issue or feedback here…';
+
+      const topicSelect = document.getElementById('field-topic');
+      topicSelect.options[0].textContent = lang === 'tr' ? 'Bir konu seçin…' : 'Select a topic…';
+
+      localStorage.setItem('plate_lang', lang);
+    }
+
+    // ── Form Submit ──
+    function submitForm() {
+      const name = document.getElementById('field-name').value.trim();
+      const email = document.getElementById('field-email').value.trim();
+      const topic = document.getElementById('field-topic').value;
+      const message = document.getElementById('field-message').value.trim();
+
+      if (!name || !email || !topic || !message) {
+        const lang = document.body.classList.contains('lang-tr') ? 'tr' : 'en';
+        alert(lang === 'tr' ? 'Lütfen tüm alanları doldurun.' : 'Please fill in all fields.');
+        return;
+      }
+
+      const btn = document.getElementById('submit-btn');
+      btn.classList.add('loading');
+
+      // Mailto fallback (no backend)
+      const subject = encodeURIComponent(`[PLATÉ Support] ${topic} — ${name}`);
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nTopic: ${topic}\n\n${message}`);
+      window.location.href = `mailto:fhouse.floatinghouse@gmail.com?subject=${subject}&body=${body}`;
+
+      setTimeout(() => {
+        document.getElementById('contact-form').style.display = 'none';
+        const success = document.getElementById('success-state');
+        success.classList.add('show');
+        btn.classList.remove('loading');
+      }, 600);
+    }
+
+    // ── Init ──
+    (function() {
+      const saved = localStorage.getItem('plate_lang');
+      const browser = navigator.language?.startsWith('tr') ? 'tr' : 'en';
+      const lang = saved || browser;
+      if (lang === 'tr') setLang('tr');
+
+      // Set default placeholder
+      const lang2 = document.body.classList.contains('lang-tr') ? 'tr' : 'en';
+      document.getElementById('field-message').placeholder = lang2 === 'tr'
+        ? 'Sorununuzu veya geri bildiriminizi buraya yazın…'
+        : 'Describe your issue or feedback here…';
+      document.getElementById('field-topic').options[0].textContent =
+        lang2 === 'tr' ? 'Bir konu seçin…' : 'Select a topic…';
+    })();
+  </script>
+
+</body>
+</html>
